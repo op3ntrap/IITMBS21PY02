@@ -45,7 +45,7 @@ class Chefs:
         a = self.dishes[x].owner
         b = self.dishes[y].owner
         if a == b:
-            return sys.stdout.write("Invalid Query")
+            return sys.stdout.write("Invalid query!")
         if a.max_score < b.max_score:
             # transfer ownership
             # self.dishes[x].owner = b
