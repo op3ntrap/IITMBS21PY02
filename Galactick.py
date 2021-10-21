@@ -49,13 +49,16 @@ class GFA:
     def update_cost_indices(self):
         for planet in range(1, self.planets + 1):
             given_cost = int(stdin.readline())
+            # print(given_cost)
             planet_root = self.fetch_root(planet)
+            # print("rot", planet_root.id)
             self.efficient_path.add(planet_root)
             if given_cost >= 0:
                 if planet_root.cost == -1:
                     planet_root.cost = given_cost
                 else:
                     planet_root.cost = min(planet_root.cost, given_cost)
+                    # print("root cost", planet_root.cost)
 
     def is_viable(self):
         # flag = False
@@ -76,3 +79,11 @@ class GFA:
             costs.sort()
             self.minimum_cost = sum(costs) + (len(self.efficient_path) - 2) * costs[0]
         return self.minimum_cost
+
+
+total_planets, given_pathways = tuple(map(int, stdin.readline().split(' ')))
+universe = GFA(total_planets, given_pathways)
+universe.process_existing_paths()
+universe.update_cost_indices()
+result = universe.minimum_viable_cost()
+print(result)
